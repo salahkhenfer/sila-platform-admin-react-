@@ -1,5 +1,3 @@
-"use client";
-
 import { DeletePost } from "../utils/deletePost";
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
@@ -53,7 +51,7 @@ const Posts = ({ post }: { post: Postgg }) => {
     setLoading(true);
 
     if (post.photos != null) {
-      const deletePromises = post.photos.map(async (photo: any) => {
+      const deletePromises = post.photos.map(async (photo) => {
         await DeleteFile(photo.photo);
       });
 
@@ -161,7 +159,7 @@ const Posts = ({ post }: { post: Postgg }) => {
       {post.videos != null && post.videos.length > 1 && (
         <Carousel>
           <CarouselContent className="h-[17rem]">
-            {post.videos.map((video: any) => (
+            {post.videos.map((video) => (
               <CarouselItem>
                 <video
                   className="w-full h-full object-cover"

@@ -1,19 +1,21 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { BiStats } from "react-icons/bi";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdHistoryToggleOff,
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+} from "react-icons/md";
 import { TbLayoutDashboardFilled, TbLogout2 } from "react-icons/tb";
 import { Button } from "../components/ui/button";
 
-import { MdHistoryToggleOff } from "react-icons/md";
 import { RiStickyNoteAddFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../lib/Auth";
 
 const SideNav = () => {
   const [shrink, setShrink] = useState<boolean>(false);
-  const [focused, setFocused] = useState<string>("");
-  const nav = useNavigate();
+
   const { logout } = useAuth();
   const handelLogout = () => {
     logout();

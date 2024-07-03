@@ -1,6 +1,6 @@
-"use client";
 
-import { useContext, useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 import { BsKeyboardFill } from "react-icons/bs";
 import { CiTextAlignLeft } from "react-icons/ci";
 import { FaCheck, FaLink } from "react-icons/fa6";
@@ -9,7 +9,7 @@ import { LuSaveAll } from "react-icons/lu";
 import { PiNotepadBold } from "react-icons/pi";
 import { RiUploadCloudFill } from "react-icons/ri";
 import { TiWarning } from "react-icons/ti";
-import { SponsorContext } from "../Pages/Sponsor";
+// import { SponsorContext } from "../Pages/Sponsor";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -20,9 +20,10 @@ import {
   SelectValue,
 } from "./ui/select";
 
-const goalStep = ({ index }: { index: number }) => {
-  //Context for state management
-  const { steps, setSteps } = useContext(SponsorContext);
+const GoalStep = ({ index }: { index: number }) => {
+  //Context for state
+  
+  // const { setSteps } = useContext(SponsorContext);
 
   //Normal states
   const [stepTitle, setStepTitle] = useState<string>("");
@@ -39,18 +40,18 @@ const goalStep = ({ index }: { index: number }) => {
   }, [stepTitle, stepNumber, stepType, stepContent, itemsNumber, items, note]);
 
   const saveStep = () => {
-    setSteps((prev: any) => [
-      ...prev,
-      {
-        stepTitle: stepTitle,
-        stepNumber: stepNumber,
-        stepType: stepType,
-        stepContent: stepContent,
-        itemsNumber: itemsNumber,
-        items: items,
-        note: note,
-      },
-    ]);
+    // setSteps((prev: any) => [
+    //   ...prev,
+    //   {
+    //     stepTitle: stepTitle,
+    //     stepNumber: stepNumber,
+    //     stepType: stepType,
+    //     stepContent: stepContent,
+    //     itemsNumber: itemsNumber,
+    //     items: items,
+    //     note: note,
+    //   },
+    // ]);
 
     setSaved(true);
   };
@@ -201,4 +202,4 @@ const goalStep = ({ index }: { index: number }) => {
   );
 };
 
-export default goalStep;
+export default GoalStep;

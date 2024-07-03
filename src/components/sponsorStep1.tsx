@@ -1,10 +1,8 @@
-"use client";
-
 import { useContext, useEffect, useState } from "react";
 import { FaInstagram, FaSnapchatGhost, FaTiktok } from "react-icons/fa";
 import { FaMeta } from "react-icons/fa6";
 import { IoIosCloseCircle, IoIosCloudUpload } from "react-icons/io";
-import { useLocation, useNavigate } from "react-router-dom";
+import { To, useLocation, useNavigate } from "react-router-dom";
 import { SponsorContext } from "../Pages/Sponsor";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -16,7 +14,7 @@ import {
   SelectValue,
 } from "./ui/select";
 
-const sponsorStep1 = () => {
+const SponsorStep1 = () => {
   //Context data for state management
   const { file, setFile } = useContext(SponsorContext);
 
@@ -27,12 +25,12 @@ const sponsorStep1 = () => {
   const searchParams = new URLSearchParams(location.search);
   const pathName = location.pathname;
 
-  const replace = (path) => {
+  const replace = (path: To) => {
     navigate(path, { replace: true });
   };
 
   //Getting search params
-  const sponsorNameParam = searchParams.get("sponsorName");
+  // const sponsorNameParam = searchParams.get("sponsorName");
   const platformParam = searchParams.get("platform");
 
   //Normal states
@@ -103,7 +101,7 @@ const sponsorStep1 = () => {
         className="w-full h-[10rem] border-[3px] border-dotted border-black rounded-lg flex items-center justify-center cursor-pointer"
       >
         <input
-          onChange={(e) => setFile(e.target.files?.[0])}
+          onChange={(e) => setFile(e.target.files?.[0] || null)}
           className="hidden"
           type="file"
           id="file"
@@ -130,4 +128,4 @@ const sponsorStep1 = () => {
   );
 };
 
-export default sponsorStep1;
+export default SponsorStep1;

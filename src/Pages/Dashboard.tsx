@@ -1,9 +1,17 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import SideNav from "../components/SideNav";
 import { createContext, useState, useEffect } from "react";
 import { useAuth } from "../lib/Auth";
 
-export const SubmissionContext = createContext();
+import { Dispatch, SetStateAction } from "react";
+
+export const SubmissionContext = createContext<{
+  selectedSubmission: string;
+  setSelectedSubmission: Dispatch<SetStateAction<string>>;
+}>({
+  selectedSubmission: "",
+  setSelectedSubmission: () => {},
+});
 
 function Dashboard() {
   const [selectedSubmission, setSelectedSubmission] = useState("");

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Progress } from "./ui/progress";
 import clsx from "clsx";
 

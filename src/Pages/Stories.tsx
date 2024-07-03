@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { GetStories } from "../utils/getStories";
-import Story from "../components/story";
-import StoryPopUp from "../components/storyPopUp";
 import Skeleton from "@mui/material/Skeleton";
+import { useEffect, useState } from "react";
+import StoryPopUp from "../components/storyPopUp";
+import { GetStories } from "../utils/getStories";
+import Story from "../components/Story";
 
 const Stories = () => {
   const [stories, setStories] = useState([]);
@@ -59,7 +59,7 @@ const Stories = () => {
         {stories.length == 0 && (
           <div className="w-full h-[22rem] flex justify-center">
             <div className="h-[200px] w-[200px] relative">
-              <img src="/post.gif" alt="post image" fill objectFit="cover" />
+              <img src="/post.gif" alt="post image" />
             </div>
           </div>
         )}

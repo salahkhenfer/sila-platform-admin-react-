@@ -1,5 +1,9 @@
-import React from "react";
-import { BsFilePost } from "react-icons/bs";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useState } from "react";
+import { IoIosCloseCircle } from "react-icons/io";
+import { IoVideocam } from "react-icons/io5";
+import { TbPhotoSquareRounded, TbSend } from "react-icons/tb";
+import { Button } from "../components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,12 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../components/ui/dialog";
-import { Textarea } from "../components/ui/textarea";
-import { IoIosCloseCircle } from "react-icons/io";
-import { TbPhotoSquareRounded } from "react-icons/tb";
-import { TbSend } from "react-icons/tb";
-import { Button } from "../components/ui/button";
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -21,19 +19,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { IoVideocam } from "react-icons/io5";
+import { Textarea } from "../components/ui/textarea";
 import { AddPost } from "../utils/addPost";
 import { AddPostPhoto } from "../utils/addPostPhoto";
 import { AddPostVideo } from "../utils/addPostVideo";
 import { UploadFile } from "../utils/upload";
-import CircularProgress from "@mui/material/CircularProgress";
 
-const postPopUp = () => {
+const PostPopUp = () => {
   const [post, setPost] = useState("");
   const [mediaType, setMediaType] = useState("");
-  const [photos, setPhotos] = useState<any>(null);
-  const [videos, setVideos] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [photos, setPhotos] = useState<FileList | null>(null);
+  const [videos, setVideos] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const sendPost = async () => {
     setLoading(true);
@@ -44,8 +41,8 @@ const postPopUp = () => {
         (async () => {
           try {
             const uploadPromises = Object.values(photos).map(
-              async (photo: any) => {
-                const url = await UploadFile(photo);
+              async (photo: unknown) => {
+                const url = await UploadFile(photo as File);
                 AddPostPhoto(url, postData.post.id);
               }
             );
@@ -63,7 +60,7 @@ const postPopUp = () => {
         (async () => {
           try {
             const uploadPromises = Object.values(videos).map(
-              async (video: any) => {
+              async (video: File) => {
                 const url = await UploadFile(video);
                 AddPostVideo(url, postData.post.id);
               }
@@ -137,7 +134,7 @@ const postPopUp = () => {
               <TbPhotoSquareRounded size={30} />
               {photos != null && photos.length != 0 ? (
                 <div className="flex items-center gap-2 flex-wrap max-w-[22rem] max-h-[6rem] overflow-auto">
-                  {Object.values(photos).map((photo: any) => (
+                  {Object.values(photos).map((photo: File) => (
                     <div className="border-[1px] border-slate-300 rounded-md p-1 pl-5 pr-20 flex items-center gap-4 relative max-w-[10rem]">
                       <p className="truncate">{photo.name}</p>
                       <Button
@@ -174,7 +171,7 @@ const postPopUp = () => {
               <IoVideocam size={30} />
               {videos != null && videos.length != 0 ? (
                 <div className="flex items-center gap-2 flex-wrap max-w-[22rem] max-h-[6rem] overflow-auto">
-                  {Object.values(videos).map((video: any) => (
+                  {Object.values(videos).map((video: File) => (
                     <div className="border-[1px] border-slate-300 rounded-md p-1 pl-5 pr-20 flex items-center gap-4 relative max-w-[10rem]">
                       <p className="truncate">{video.name}</p>
                       <Button
@@ -214,4 +211,4 @@ const postPopUp = () => {
   );
 };
 
-export default postPopUp;
+export default PostPopUp;

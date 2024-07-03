@@ -77,6 +77,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { login, auth } = useAuth() as {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     login: Function;
     auth: { isAuthenticated: boolean };
   };

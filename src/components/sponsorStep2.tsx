@@ -33,7 +33,7 @@ const SponsorStep2 = () => {
   );
   const [durationType, setDurationType] = useState(durationTypeParam || "");
 
-  const updateSearchParams = (key, value) => {
+  const updateSearchParams = (key: string, value: string) => {
     const params = new URLSearchParams(location.search);
     params.set(key, value);
     navigate(`${location.pathname}?${params.toString()}`, { replace: true });

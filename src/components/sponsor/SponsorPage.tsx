@@ -1,10 +1,8 @@
-"use client";
-
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import SponsorStep1 from "../../components/sponsorStep1";
-import SponsorStep2 from "../../components/sponsorStep2";
 import SponsorStep3 from "../../components/sponsorStep3";
+import SponsorStep2 from "../../components/sponsorStep2";
 import StepsProgress from "../../components/stepsProgress";
 import { Button } from "../../components/ui/button";
 import {
@@ -20,85 +18,86 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { FaCheck } from "react-icons/fa6";
 import { IoIosWarning } from "react-icons/io";
 import { VscTools } from "react-icons/vsc";
-import { useLocation, useNavigate } from "react-router-dom";
-import { SponsorContext } from "../../Pages/Sponsor";
-import { AddGoal } from "../../utils/addGoal";
-import { AddItem } from "../../utils/addItem";
-import { AddSponsor } from "../../utils/addSponsor";
-import { AddStep } from "../../utils/addStep";
-import { UploadFile } from "../../utils/upload";
+// import { To, useLocation, useNavigate } from "react-router-dom";
+// import { SponsorContext, SponsorContextType } from "../../Pages/Sponsor";
+// import { AddGoal } from "../../utils/addGoal";
+// import { AddItem } from "../../utils/addItem";
+// import { AddSponsor } from "../../utils/addSponsor";
+// import { AddStep } from "../../utils/addStep";
+// import { UploadFile } from "../../utils/upload";
+// import { Step } from "@mui/material";
 
 const SponsorPage = () => {
   //Context for state
-  const location = useLocation();
+  // const location = useLocation();
 
-  const { file, setFile, steps } = useContext(SponsorContext);
+  // const { file, steps } = useContext<SponsorContextType>(SponsorContext);
 
-  //Search params initialization
-  const navigate = useNavigate();
+  // //Search params initialization
+  // const navigate = useNavigate();
 
-  const searchParams = new URLSearchParams(location.search);
-  const pathName = location.pathname;
+  // const searchParams = new URLSearchParams(location.search);
+  // // const pathName = location.pathname;
 
-  const replace = (path) => {
-    navigate(path, { replace: true });
-  };
+  // const replace = (path: To) => {
+  //   navigate(path, { replace: true });
+  // };
 
   //Getting step 1 search params
-  const sponsorNameParam = searchParams.get("sponsorName");
-  const platformParam = searchParams.get("platform");
+  // const sponsorNameParam = searchParams.get("sponsorName");
+  // const platformParam = searchParams.get("platform");
 
   //Getting step 2 search params
-  const goalNameParam = searchParams.get("goalName");
-  const goalPriceParam = searchParams.get("goalPrice");
-  const currencyParam = searchParams.get("currency");
-  const durationParam = searchParams.get("duration");
-  const durationTypeParam = searchParams.get("durationType");
+  // const goalNameParam = searchParams.get("goalName");
+  // const goalPriceParam = searchParams.get("goalPrice");
+  // const currencyParam = searchParams.get("currency");
+  // const durationParam = searchParams.get("duration");
+  // const durationTypeParam = searchParams.get("durationType");
 
   //Normal states
   const [stepsNum, setStepsNum] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading] = useState<boolean>(false);
 
-  const finishProccess = async () => {
-    setLoading(true);
+  // const finishProccess = async () => {
+  //   setLoading(true);
 
-    let sponsorIcon = "";
+  //   // let sponsorIcon = "";
 
-    if (file != null) {
-      const fileUrl = await UploadFile(file);
-      sponsorIcon = fileUrl;
-    }
+  //   // if (file != null) {
+  //   //   const fileUrl = await UploadFile(file);
+  //   //   sponsorIcon = fileUrl;
+  //   // }
 
-    const sponsorData = await AddSponsor(
-      String(sponsorNameParam),
-      String(platformParam),
-      String(sponsorIcon)
-    );
-    const goalData = await AddGoal(
-      String(goalNameParam),
-      String(sponsorData.sponsor.id),
-      Number(goalPriceParam),
-      String(currencyParam),
-      Number(durationParam),
-      String(durationTypeParam)
-    );
-    steps.map(async (item: any) => {
-      const stepData = await AddStep(
-        String(goalData.sponsor_goal.id),
-        Number(item.stepNumber),
-        String(item.stepTitle),
-        String(item.stepType),
-        String(item.stepContent),
-        String(item.note)
-      );
-      item.items.map((x: any) => {
-        const itemData = AddItem(String(stepData.step.id), String(x));
-      });
-    });
+  //   // const sponsorData = await AddSponsor(
+  //   //   String(sponsorNameParam),
+  //   //   String(platformParam),
+  //   //   String(sponsorIcon)
+  //   // );
+  //   // const goalData = await AddGoal(
+  //   //   String(goalNameParam),
+  //   //   String(sponsorData.sponsor.id),
+  //   //   Number(goalPriceParam),
+  //   //   String(currencyParam),
+  //   //   Number(durationParam),
+  //   //   String(durationTypeParam)
+  //   // );
+  //   // steps.map(async (item: Step) => {
+  //   //   const stepData = await AddStep(
+  //   //   String(goalData.sponsor_goal.id),
+  //   //   Number(item.stepNumber),
+  //   //   String(item.stepTitle),
+  //   //   String(item.stepType),
+  //   //   String(item.stepContent),
+  //   //   String(item.note)
+  //   //   );
+  //   //   // item.items.map((x: string) => {
+  //   //   // // const itemData = AddItem(String(stepData.step.id), String(x));
+  //   //   // });
+  //   // });
 
-    replace("/dashboard");
-    setLoading(false);
-  };
+  //   replace("/dashboard");
+  //   setLoading(false);
+  // };
 
   return (
     <div className="w-full h-screen flex flex-col items-center md:px-10">
@@ -144,7 +143,7 @@ const SponsorPage = () => {
             </Button>
           ) : (
             <Button
-              onClick={finishProccess}
+              // onClick={finishProccess}
               className="w-full flex items-center gap-5"
             >
               {loading ? (

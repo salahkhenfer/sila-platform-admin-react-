@@ -1,16 +1,13 @@
 "use client";
 
-import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
-import { TbHistoryToggle } from "react-icons/tb";
-import { Input } from "./ui/input";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useState } from "react";
+import { BsFilePlus } from "react-icons/bs";
+import { FaCircleCheck } from "react-icons/fa6";
+import { TbCalendarShare, TbHistoryToggle } from "react-icons/tb";
+import { AddStory } from "../utils/addStory";
+import { UploadFile } from "../utils/upload";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -19,26 +16,26 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { BsFilePlus } from "react-icons/bs";
-import { FaCircleCheck } from "react-icons/fa6";
-import { Button } from "./ui/button";
-import { TbCalendarShare } from "react-icons/tb";
-import { RiApps2AddFill } from "react-icons/ri";
-import { useState } from "react";
-import { AddStory } from "../utils/addStory";
-import { UploadFile } from "../utils/upload";
-import CircularProgress from "@mui/material/CircularProgress";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Input } from "./ui/input";
 
-const storyPopUp = () => {
+const StoryPopUp = () => {
   const [highlight, setHighlight] = useState("");
-  const [story, setStory] = useState<any>(null);
+  const [Story, setStory] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   const shareStory = async () => {
     setLoading(true);
 
-    if (story != null) {
-      const url = await UploadFile(story);
+    if (Story != null) {
+      const url = await UploadFile(Story);
       await AddStory(highlight, url);
 
       //finished
@@ -70,7 +67,7 @@ const storyPopUp = () => {
 
         <label htmlFor="file" className="cursor-pointer">
           <input
-            onChange={(e) => setStory(e.target.files?.[0])}
+            onChange={(e) => setStory(e.target.files?.[0] || null)}
             accept="image/*"
             className="hidden"
             type="file"
@@ -82,16 +79,16 @@ const storyPopUp = () => {
                 Press to add <BsFilePlus size={20} />
               </CardTitle>
               <CardDescription className="flex items-center justify-center">
-                The story will last for 24 Hours.
+                The Story will last for 24 Hours.
               </CardDescription>
             </CardHeader>
-            {story != null && (
+            {Story != null && (
               <CardContent className="flex items-center justify-center">
                 <FaCircleCheck size={30} />
               </CardContent>
             )}
 
-            {story != null && story.length != 0 ? (
+            {Story != null && Story?.size != 0 ? (
               <CardFooter className="w-full">
                 <Button
                   onClick={shareStory}
@@ -117,4 +114,4 @@ const storyPopUp = () => {
   );
 };
 
-export default storyPopUp;
+export default StoryPopUp;

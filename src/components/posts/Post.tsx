@@ -1,7 +1,4 @@
-// @ts-nocheck
-
 import { useState } from "react";
-
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
 import { GoDotFill } from "react-icons/go";
@@ -40,16 +37,28 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 
-const Post = ({ post }: { post: any }) => {
+interface PostProps {
+  post: {
+    id: string;
+    photos?: { photo: string }[];
+    videos?: { video: string }[];
+    created_at: string;
+    post_text: string;
+  };
+}
+
+const Post = ({ post }: PostProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const deletePost = async () => {
     setLoading(true);
 
     if (post.photos != null) {
-      const deletePromises = post.photos.map(async (photo: any) => {
-        await DeleteFile(photo.photo);
-      });
+      const deletePromises = post.photos.map(
+        async (photo: { photo: string }) => {
+          await DeleteFile(photo.photo);
+        }
+      );
 
       await Promise.all(deletePromises);
       await DeletePost(post.id);
@@ -57,9 +66,11 @@ const Post = ({ post }: { post: any }) => {
     }
 
     if (post.videos != null) {
-      const deletePromises = post.videos.map(async (video: any) => {
-        await DeleteFile(video.video);
-      });
+      const deletePromises = post.videos.map(
+        async (video: { video: string }) => {
+          await DeleteFile(video.video);
+        }
+      );
 
       await Promise.all(deletePromises);
       await DeletePost(post.id);
@@ -130,9 +141,9 @@ const Post = ({ post }: { post: any }) => {
       {post.photos != null && post.photos.length > 1 && (
         <Carousel>
           <CarouselContent className="h-[17rem]">
-            {post.photos.map((photo: any) => (
+            {post.photos.map((photo: { photo: string }) => (
               <CarouselItem className="relative">
-                <img src={photo.photo} alt="post image" objectFit="cover" />
+                <img src={photo.photo} alt="post image" />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -143,14 +154,14 @@ const Post = ({ post }: { post: any }) => {
 
       {post.photos != null && post.photos.length == 1 && (
         <div className="w-full h-[17rem] relative">
-          <img src={post.photos[0].photo} alt="post image" objectFit="cover" />
+          <img src={post.photos[0].photo} alt="post image" />
         </div>
       )}
 
       {post.videos != null && post.videos.length > 1 && (
         <Carousel>
           <CarouselContent className="h-[17rem]">
-            {post.videos.map((video: any) => (
+            {post.videos.map((video) => (
               <CarouselItem>
                 <video
                   className="w-full h-full object-cover"

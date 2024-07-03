@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Card } from "./ui/card";
 import {
@@ -40,13 +38,13 @@ import { DeleteStory } from "../utils/deleteStory";
 import { DeleteFile } from "../utils/deleteFile";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const story = ({ story }: { story: any }) => {
+const Story = ({ story }: { Story: unknown }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const deleteStory = async () => {
     setLoading(true);
 
-    await DeleteFile(story.story);
+    await DeleteFile(story.Story);
     await DeleteStory(story.id);
     window.location.reload();
   };
@@ -56,11 +54,11 @@ const story = ({ story }: { story: any }) => {
       <Dialog>
         <DialogTrigger>
           <Card className="w-[14rem] h-[14rem] relative overflow-hidden">
-            <img src={story.story} alt="story image" fill objectFit="cover" />
+            <img src={story.story} alt="Story image" fill objectFit="cover" />
           </Card>
         </DialogTrigger>
         <DialogContent className="h-full overflow-hidden bg-transparent border-0">
-          <img src={story.story} alt="story image" fill objectFit="cover" />
+          <img src={story.story} alt="Story image" fill objectFit="cover" />
           <div className="z-10 h-fit mt-5">
             <div className="w-full h-[.2rem] bg-gray-300 rounded-full">
               <motion.div
@@ -114,7 +112,7 @@ const story = ({ story }: { story: any }) => {
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                       This action cannot be undone. This will permanently delete
-                      the story and remove it's data from our servers.
+                      the Story and remove it's data from our servers.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -137,4 +135,4 @@ const story = ({ story }: { story: any }) => {
   );
 };
 
-export default story;
+export default Story;

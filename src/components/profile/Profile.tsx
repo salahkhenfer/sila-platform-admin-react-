@@ -1,5 +1,3 @@
-"use client";
-
 import { useContext, useEffect, useState } from "react";
 import { BsFillTrash2Fill } from "react-icons/bs";
 import { FaCircleCheck, FaMeta } from "react-icons/fa6";
@@ -44,7 +42,7 @@ import { UpdateStatus } from "../../utils/updateSubmissionStatus";
 const Profile = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const replace = (path) => {
+  const replace = (path: string) => {
     navigate(path, { replace: true });
   };
 
@@ -64,10 +62,20 @@ const Profile = () => {
   }, []);
 
   const param = searchParams.get("submission");
-  const submission = JSON.parse(param);
+  const submission = param ? JSON.parse(param) : null;
 
   //Getting user info
-  const [userInfo, setUserInfo] = useState<any>("");
+  interface UserInfo {
+    user_name: string;
+    email: string;
+    phone: string;
+  }
+
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    user_name: "",
+    email: "",
+    phone: "",
+  });
 
   useEffect(() => {
     if (submission != null) {
@@ -334,7 +342,7 @@ const Profile = () => {
                 <img
                   src={submission?.product_photo}
                   alt="submission image"
-                  objectFit="cover"
+                  className="w-full h-full object-cover"
                 />
               ) : (
                 <div className="h-full w-full flex items-center justify-center">

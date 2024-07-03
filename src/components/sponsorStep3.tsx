@@ -1,11 +1,9 @@
-"use client";
-
 import { useState } from "react";
 import { PiLadderLight } from "react-icons/pi";
-import GoalStep from "./goalStep";
+import GoalStep from "./GoalStep";
 import { Button } from "./ui/button";
 
-const sponsorStep3 = () => {
+const SponsorStep3 = () => {
   const [stepsNumber, setStepsNumber] = useState<number>(1);
 
   return (
@@ -27,4 +25,4 @@ const sponsorStep3 = () => {
   );
 };
 
-export default sponsorStep3;
+export default SponsorStep3;
