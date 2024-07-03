@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 import Skeleton from "@mui/material/Skeleton";
-import PostPopUp from "../components/PostPopUp";
+
 import Post from "../components/posts/Post";
 import { GetPosts } from "../utils/getPosts";
+import PostPopUp from "../components/postPopUp";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -56,7 +57,7 @@ const Posts = () => {
         {posts.length == 0 && (
           <div className="w-full h-[22rem] flex justify-center">
             <div className="h-[200px] w-[200px] relative">
-              <img src="/post.gif" alt="post image"  />
+              <img src="/post.gif" alt="post image" />
             </div>
           </div>
         )}
