@@ -68,7 +68,7 @@ const PostPopUp = () => {
 
             await Promise.all(uploadPromises);
             alert("Post sent successfully ✅!");
-            window.location.reload();
+            window.location.pathname = "/posts";
           } catch (err) {
             alert("Error uploading files");
           }
