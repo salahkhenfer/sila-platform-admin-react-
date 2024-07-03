@@ -201,7 +201,7 @@ const submission = ({ submission }: { submission: any }) => {
           <div className=" border-b-[2px] border-[#EAECF0]">
             <Link
               onClick={() => setSelectedSubmission(submission)}
-              to={"/dashboard/profile"}
+              to={"/profile"}
             >
               <Button className="rounded-full px-8 bg-[#7538D4]">
                 See profile

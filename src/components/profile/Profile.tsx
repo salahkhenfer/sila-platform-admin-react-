@@ -93,17 +93,17 @@ const Profile = () => {
     await UpdateStatus(submission?.id, "In Process");
     setStatusLoading(true);
 
-    replace("/dashboard");
+    replace("/");
   };
   const setDoneSubmission = async () => {
     await UpdateStatus(submission?.id, "Done");
     setStatusLoading(true);
-    replace("/dashboard");
+    replace("/");
   };
   const setRejectedSubmission = async () => {
     await UpdateStatus(submission?.id, "Rejected");
     setStatusLoading(true);
-    replace("/dashboard");
+    replace("/");
   };
 
   //Rejecting submission
@@ -114,7 +114,7 @@ const Profile = () => {
     await UpdateStatus(submission?.id, "Rejected");
     await UpdateRejectionNote(submission?.id, rejectionNote);
     setRejectionLoading(true);
-    replace("/dashboard");
+    replace("/");
   };
 
   return (
