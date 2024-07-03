@@ -19,8 +19,8 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="flex justify-center flex-col-reverse pt-4 h-full min-w-[40rem]">
-      <div className="w-1/2 mx-auto h-[90vh] overflow-auto">
+    <div className="flex justify-center flex-col-reverse pt-4 h-full md:min-w-[40rem]">
+      <div className="md:w-1/2 mx-auto h-[90vh] overflow-auto">
         {loading ? (
           <>
             <Skeleton
