@@ -111,6 +111,7 @@ const SideNav = () => {
             <Link
               className="hidden lg:block text-purple-600 font-semibold text-[1.3rem] ml-4"
               to="/"
+               onClick={() => setShrink(!shrink)}
             >
               <h1>Sila Agency</h1>
             </Link>
@@ -120,6 +121,7 @@ const SideNav = () => {
         <div className="mt-10">
           <Link
             to={"/"}
+             onClick={() => setShrink(!shrink)}
             className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"
           >
             <TbLayoutDashboardFilled size={20} />
@@ -127,6 +129,7 @@ const SideNav = () => {
           </Link>
           <Link
             to={"/posts"}
+             onClick={() => setShrink(!shrink)}
             className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"
           >
             <RiStickyNoteAddFill size={20} />
@@ -134,6 +137,7 @@ const SideNav = () => {
           </Link>
           <Link
             to={"/stories"}
+             onClick={() => setShrink(!shrink)}
             className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"
           >
             <MdHistoryToggleOff size={20} />
@@ -141,6 +145,7 @@ const SideNav = () => {
           </Link>
           <Link
             to={"/sponsor"}
+             onClick={() => setShrink(!shrink)}
             className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"
           >
             <BiStats size={20} />
