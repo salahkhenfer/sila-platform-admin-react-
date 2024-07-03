@@ -4,7 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 import Post from "../components/posts/Post";
 import { GetPosts } from "../utils/getPosts";
-import PostPopUp from "../components/PostPopUp";
+import PostPopUp from "../components/postPopUp";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);

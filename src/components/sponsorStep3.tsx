@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PiLadderLight } from "react-icons/pi";
-import GoalStep from "./GoalStep";
+import GoalStep from "./goalStep";
 import { Button } from "./ui/button";
 
 const SponsorStep3 = () => {
