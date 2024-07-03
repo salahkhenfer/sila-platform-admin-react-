@@ -2,7 +2,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { useEffect, useState } from "react";
 import StoryPopUp from "../components/storyPopUp";
 import { GetStories } from "../utils/getStories";
-import Story from "../components/Story";
+import Story from "../components/story";
 
 const Stories = () => {
   const [stories, setStories] = useState([]);
