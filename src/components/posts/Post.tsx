@@ -79,7 +79,7 @@ const Post = ({ post }: PostProps) => {
   };
 
   return (
-    <div className="border-b-[1px] border-slate-300">
+       <div className="border-b-[1px] border-slate-300 py-5  ">
       <div className="p-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Avatar>
@@ -140,7 +140,7 @@ const Post = ({ post }: PostProps) => {
 
       {post.photos != null && post.photos.length > 1 && (
         <Carousel>
-          <CarouselContent className="h-[17rem]">
+          <CarouselContent className="h-[17rem] py-5  ">
             {post.photos.map((photo: { photo: string }) => (
               <CarouselItem className="relative">
                 <img src={photo.photo} alt="post image" />
@@ -153,7 +153,7 @@ const Post = ({ post }: PostProps) => {
       )}
 
       {post.photos != null && post.photos.length == 1 && (
-        <div className="w-full h-[17rem] relative">
+        <div className="w-full h-[17rem] relative overflow-hidden">
           <img src={post.photos[0].photo} alt="post image" />
         </div>
       )}
