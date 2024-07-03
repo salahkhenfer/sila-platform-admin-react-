@@ -1,6 +1,6 @@
 "use client";
 
-import { DeletePost } from ".../utils/deletePost";
+import { DeletePost } from "../utils/deletePost";
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
 import { DeleteFile } from "../utils/deleteFile";
@@ -13,23 +13,23 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./components/ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar";
-import { Button } from "./components/ui/button";
+} from "./ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./components/ui/carousel";
+} from "./ui/carousel";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./components/ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
@@ -38,12 +38,14 @@ import { TbTrashFilled } from "react-icons/tb";
 
 interface Postgg {
   id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   photos: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   videos: any[];
   created_at: string;
   post_text: string;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Posts = ({ post }: { post: Postgg }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -61,6 +63,7 @@ const Posts = ({ post }: { post: Postgg }) => {
     }
 
     if (post.videos != null) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const deletePromises = post.videos.map(async (video: any) => {
         await DeleteFile(video.video);
       });
@@ -72,7 +75,7 @@ const Posts = ({ post }: { post: Postgg }) => {
   };
 
   return (
-    <div className="border-b-[1px] border-slate-300  mx-auto">
+    <div className="border-b-[1px] h-fit border-slate-300  mx-auto">
       <div className="p-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Avatar>
@@ -133,14 +136,13 @@ const Posts = ({ post }: { post: Postgg }) => {
 
       {post.photos != null && post.photos.length > 1 && (
         <Carousel>
-          <CarouselContent className="h-[17rem]">
-            {post.photos.map((photo: any) => (
-              <CarouselItem className="relative">
+          <CarouselContent className=" relative h-fit">
+            {post.photos.map((photo) => (
+              <CarouselItem className="relative  ">
                 <img
                   src={photo.photo}
                   alt="post image"
-                  fill
-                  objectFit="cover"
+                  className="overflow-hidden"
                 />
               </CarouselItem>
             ))}
@@ -151,13 +153,8 @@ const Posts = ({ post }: { post: Postgg }) => {
       )}
 
       {post.photos != null && post.photos.length == 1 && (
-        <div className="w-full h-[17rem] relative">
-          <img
-            src={post.photos[0].photo}
-            alt="post image"
-            fill
-            objectFit="cover"
-          />
+        <div className="w-full h-[17rem]  overflow-hidden  ">
+          <img src={post.photos[0].photo} alt="post image" />
         </div>
       )}
 
@@ -194,4 +191,4 @@ const Posts = ({ post }: { post: Postgg }) => {
   );
 };
 
-export default posts;
+export default Posts;

@@ -76,11 +76,14 @@ export const router = createBrowserRouter([
 function App() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login, auth } = useAuth();
+  const { login, auth } = useAuth() as {
+    login: Function;
+    auth: { isAuthenticated: boolean };
+  };
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("isAuthenticated");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
 
