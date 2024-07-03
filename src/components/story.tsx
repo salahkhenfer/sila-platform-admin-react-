@@ -8,13 +8,11 @@ import {
   DialogTitle,
   DialogDescription,
 } from "./ui/dialog";
-import { Progress } from "./ui/progress";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -24,7 +22,6 @@ import { PiSubtitlesFill } from "react-icons/pi";
 import { TbTrashFilled } from "react-icons/tb";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -38,7 +35,16 @@ import { DeleteStory } from "../utils/deleteStory";
 import { DeleteFile } from "../utils/deleteFile";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const Story = ({ story }: { Story: unknown }) => {
+type StoryProps = {
+  story: {
+    Story: string;
+    story: string;
+    id: string;
+    title: string;
+  };
+};
+
+const Story = ({ story }: StoryProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const deleteStory = async () => {
@@ -54,11 +60,11 @@ const Story = ({ story }: { Story: unknown }) => {
       <Dialog>
         <DialogTrigger>
           <Card className="w-[14rem] h-[14rem] relative overflow-hidden">
-            <img src={story.story} alt="Story image" fill objectFit="cover" />
+            <img src={story.story} alt="Story image" />
           </Card>
         </DialogTrigger>
         <DialogContent className="h-full overflow-hidden bg-transparent border-0">
-          <img src={story.story} alt="Story image" fill objectFit="cover" />
+          <img src={story.story} alt="Story image" />
           <div className="z-10 h-fit mt-5">
             <div className="w-full h-[.2rem] bg-gray-300 rounded-full">
               <motion.div
