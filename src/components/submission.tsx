@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useContext, useState } from "react";
-import { Checkbox } from "./ui/checkbox";
-import { BsChatSquareDotsFill } from "react-icons/bs";
+import { useContext, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
 
-import { Button } from "./ui/button";
-import { IoIosCloseCircle } from "react-icons/io";
+import CircularProgress from "@mui/material/CircularProgress";
 import { BsFillTrash2Fill } from "react-icons/bs";
+import { IoIosCloseCircle } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { SubmissionContext } from "../Pages/Dashboard";
+import { DeleteFile } from "../utils/deleteFile";
+import { DeleteSubmission } from "../utils/deleteSubmission";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -19,12 +20,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { DeleteSubmission } from "../utils/deleteSubmission";
-import { DeleteFile } from "../utils/deleteFile";
-import CircularProgress from "@mui/material/CircularProgress";
-import { SubmissionContext } from "../Pages/Dashboard";
-import { Link } from "react-router-dom";
-import { GoClock } from "react-icons/go";
+import { Button } from "./ui/button";
 
 const submission = ({ submission }: { submission: any }) => {
   const { setSelectedSubmission } = useContext(SubmissionContext);

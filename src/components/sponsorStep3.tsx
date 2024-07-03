@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button } from "./ui/button";
+import { useState } from "react";
 import { PiLadderLight } from "react-icons/pi";
 import GoalStep from "./goalStep";
+import { Button } from "./ui/button";
 
 const sponsorStep3 = () => {
   const [stepsNumber, setStepsNumber] = useState<number>(1);

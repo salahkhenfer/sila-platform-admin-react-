@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { Card, CardContent } from "../ui/card";
+import CircularProgress from "@mui/material/CircularProgress";
+import moment from "moment";
+import { GoDotFill } from "react-icons/go";
+import { RiArrowDownSLine, RiVerifiedBadgeFill } from "react-icons/ri";
+import { TbTrashFilled } from "react-icons/tb";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "../../components/ui/avatar";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { GoDotFill } from "react-icons/go";
 import { Button } from "../../components/ui/button";
-import { RxDotsHorizontal } from "react-icons/rx";
-import { IoHeart } from "react-icons/io5";
-import { FaCommentDots } from "react-icons/fa6";
-import { PiEyeClosedBold } from "react-icons/pi";
 import {
   Carousel,
   CarouselContent,
@@ -20,20 +18,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../components/ui/carousel";
-import moment from "moment";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import { RiArrowDownSLine } from "react-icons/ri";
-import { TbTrashFilled } from "react-icons/tb";
+import { DeleteFile } from "../../utils/deleteFile";
+import { DeletePost } from "../../utils/deletePost";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -42,9 +37,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { DeleteFile } from "../../utils/deleteFile";
-import { DeletePost } from "../../utils/deletePost";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const Post = ({ post }: { post: any }) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -138,12 +130,7 @@ const Post = ({ post }: { post: any }) => {
           <CarouselContent className="h-[17rem]">
             {post.photos.map((photo: any) => (
               <CarouselItem className="relative">
-                <img
-                  src={photo.photo}
-                  alt="post image"
-                  fill
-                  objectFit="cover"
-                />
+                <img src={photo.photo} alt="post image" objectFit="cover" />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -154,12 +141,7 @@ const Post = ({ post }: { post: any }) => {
 
       {post.photos != null && post.photos.length == 1 && (
         <div className="w-full h-[17rem] relative">
-          <img
-            src={post.photos[0].photo}
-            alt="post image"
-            fill
-            objectFit="cover"
-          />
+          <img src={post.photos[0].photo} alt="post image" objectFit="cover" />
         </div>
       )}
 

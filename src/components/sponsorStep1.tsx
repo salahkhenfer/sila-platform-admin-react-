@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FaInstagram, FaSnapchatGhost, FaTiktok } from "react-icons/fa";
+import { FaMeta } from "react-icons/fa6";
+import { IoIosCloseCircle, IoIosCloudUpload } from "react-icons/io";
+import { useLocation, useNavigate } from "react-router-dom";
+import { SponsorContext } from "../Pages/Sponsor";
+import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -9,16 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { FaMeta } from "react-icons/fa6";
-import { FaSnapchatGhost } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { IoIosCloudUpload } from "react-icons/io";
-import { Button } from "./ui/button";
-import { IoIosCloseCircle } from "react-icons/io";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { SponsorContext } from "../Pages/Sponsor";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const sponsorStep1 = () => {
   //Context data for state management

@@ -1,5 +1,5 @@
 import { progress } from "framer-motion";
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 

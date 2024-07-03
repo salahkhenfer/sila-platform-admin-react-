@@ -1,21 +1,12 @@
-import React, { useState } from "react";
-import { Button } from "../components/ui/button";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { motion } from "framer-motion";
-import { TbLayoutDashboardFilled } from "react-icons/tb";
-import clsx from "clsx";
+import { useState } from "react";
 import { BiStats } from "react-icons/bi";
-import { TbLogout2 } from "react-icons/tb";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { TbLayoutDashboardFilled, TbLogout2 } from "react-icons/tb";
+import { Button } from "../components/ui/button";
 
-import { RiStickyNoteAddFill } from "react-icons/ri";
 import { MdHistoryToggleOff } from "react-icons/md";
+import { RiStickyNoteAddFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../lib/Auth";
 

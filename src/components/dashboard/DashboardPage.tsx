@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "../../components/ui/button";
-import { IoIosArrowDown } from "react-icons/io";
-import { Checkbox } from "../../components/ui/checkbox";
-import { BsChatSquareDotsFill } from "react-icons/bs";
-import { FaCircleCheck } from "react-icons/fa6";
-import Link from "next/link";
-import Submission from "../../components/submission";
-import { GetSubmissions } from "../../utils/getSubmissions";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useEffect, useState } from "react";
 import { TbReportMoney } from "react-icons/tb";
+import Submission from "../../components/submission";
+import { Button } from "../../components/ui/button";
+import { Checkbox } from "../../components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -18,9 +14,9 @@ import {
 } from "../../components/ui/dialog";
 import { Input } from "../../components/ui/input";
 import { GetPricing } from "../../utils/getPricing";
+import { GetSubmissions } from "../../utils/getSubmissions";
 import { UpdateConversion } from "../../utils/updateConversionPrice";
 import { UpdateMessage } from "../../utils/updateMessagePrice";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const DashboardPage = () => {
   const [submissions, setSubmissions] = useState([]);

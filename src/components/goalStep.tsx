@@ -1,6 +1,16 @@
 "use client";
 
-import React, { useEffect, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { BsKeyboardFill } from "react-icons/bs";
+import { CiTextAlignLeft } from "react-icons/ci";
+import { FaCheck, FaLink } from "react-icons/fa6";
+import { HiSelector } from "react-icons/hi";
+import { LuSaveAll } from "react-icons/lu";
+import { PiNotepadBold } from "react-icons/pi";
+import { RiUploadCloudFill } from "react-icons/ri";
+import { TiWarning } from "react-icons/ti";
+import { SponsorContext } from "../Pages/Sponsor";
+import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -9,18 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { BsKeyboardFill } from "react-icons/bs";
-import { RiUploadCloudFill } from "react-icons/ri";
-import { FaLink } from "react-icons/fa6";
-import { CiTextAlignLeft } from "react-icons/ci";
-import { HiSelector } from "react-icons/hi";
-import { PiNotepadBold } from "react-icons/pi";
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { LuSaveAll } from "react-icons/lu";
-import { FaCheck } from "react-icons/fa6";
-import { TiWarning } from "react-icons/ti";
-import { SponsorContext } from "../Pages/Sponsor";
 
 const goalStep = ({ index }: { index: number }) => {
   //Context for state management

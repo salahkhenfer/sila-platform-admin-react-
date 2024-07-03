@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useContext, useEffect } from "react";
+import { useContext, useState } from "react";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import SponsorStep1 from "../../components/sponsorStep1";
+import SponsorStep2 from "../../components/sponsorStep2";
+import SponsorStep3 from "../../components/sponsorStep3";
+import StepsProgress from "../../components/stepsProgress";
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,25 +15,18 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import StepsProgress from "../../components/stepsProgress";
-import { Button } from "../../components/ui/button";
-import { SlArrowRight } from "react-icons/sl";
-import { SlArrowLeft } from "react-icons/sl";
-import SponsorStep1 from "../../components/sponsorStep1";
-import SponsorStep2 from "../../components/sponsorStep2";
-import SponsorStep3 from "../../components/sponsorStep3";
 
-import { AddSponsor } from "../../utils/addSponsor";
-import { AddGoal } from "../../utils/addGoal";
-import { AddStep } from "../../utils/addStep";
-import { AddItem } from "../../utils/addItem";
-import { FaCheck } from "react-icons/fa6";
 import CircularProgress from "@mui/material/CircularProgress";
-import { UploadFile } from "../../utils/upload";
+import { FaCheck } from "react-icons/fa6";
 import { IoIosWarning } from "react-icons/io";
 import { VscTools } from "react-icons/vsc";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SponsorContext } from "../../Pages/Sponsor";
+import { AddGoal } from "../../utils/addGoal";
+import { AddItem } from "../../utils/addItem";
+import { AddSponsor } from "../../utils/addSponsor";
+import { AddStep } from "../../utils/addStep";
+import { UploadFile } from "../../utils/upload";
 
 const SponsorPage = () => {
   //Context for state

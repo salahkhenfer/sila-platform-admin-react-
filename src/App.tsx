@@ -19,16 +19,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./components/ui/dialog";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import { SiMonkeytie } from "react-icons/si";
 import { HiPhone } from "react-icons/hi";
 import { motion } from "framer-motion";
-import {
-  Navigate,
-  createBrowserRouter,
-  RouterProvider,
-  useNavigate,
-} from "react-router-dom";
+import { createBrowserRouter, useNavigate } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import ClientOnly from "./utils/ClientOnly";
 import DashboardPage from "./components/dashboard/DashboardPage";

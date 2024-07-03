@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { IoTime } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import {
@@ -8,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { IoTime } from "react-icons/io5";
 
 const SponsorStep2 = () => {
   const location = useLocation();

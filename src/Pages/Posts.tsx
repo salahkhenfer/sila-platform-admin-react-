@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import PostPopUp from "../components/postPopUp";
-import { GetPosts } from "../utils/getPosts";
 import Skeleton from "@mui/material/Skeleton";
+import PostPopUp from "../components/postPopUp";
 import Post from "../components/posts/Post";
+import { GetPosts } from "../utils/getPosts";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);

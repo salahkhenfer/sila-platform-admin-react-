@@ -1,52 +1,45 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
-import { Button } from "../../components/ui/button";
+import { useContext, useEffect, useState } from "react";
 import { BsFillTrash2Fill } from "react-icons/bs";
+import { FaCircleCheck, FaMeta } from "react-icons/fa6";
+import { HiOutlinePhoto } from "react-icons/hi2";
+import { IoIosCloseCircle } from "react-icons/io";
+import { IoVideocamOutline } from "react-icons/io5";
+import { MdOutlineAccessTimeFilled } from "react-icons/md";
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import { Input } from "../../components/ui/input";
-import { FaMeta } from "react-icons/fa6";
 import { Checkbox } from "../../components/ui/checkbox";
-import { IoVideocamOutline } from "react-icons/io5";
-import { HiOutlinePhoto } from "react-icons/hi2";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "../../components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import { MdOutlineAccessTimeFilled } from "react-icons/md";
-import { FaCircleCheck } from "react-icons/fa6";
-import { IoIosCloseCircle } from "react-icons/io";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../../components/ui/dialog";
+import { Input } from "../../components/ui/input";
 
 import { Textarea } from "../../components/ui/textarea";
 
-import { IoClose } from "react-icons/io5";
-import { IoVideocamOffOutline } from "react-icons/io5";
-import { TbPhotoOff } from "react-icons/tb";
-import { GetUserInfo } from "../../utils/getSubmissionUser";
-import { UpdateStatus } from "../../utils/updateSubmissionStatus";
 import CircularProgress from "@mui/material/CircularProgress";
-import { UpdateRejectionNote } from "../../utils/updateSubmissionRejectionNote";
-import { SubmissionContext } from "../../Pages/Dashboard";
+import { IoClose, IoVideocamOffOutline } from "react-icons/io5";
+import { TbPhotoOff } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router-dom";
+import { SubmissionContext } from "../../Pages/Dashboard";
+import { GetUserInfo } from "../../utils/getSubmissionUser";
+import { UpdateRejectionNote } from "../../utils/updateSubmissionRejectionNote";
+import { UpdateStatus } from "../../utils/updateSubmissionStatus";
 
 const Profile = () => {
   const location = useLocation();
@@ -341,7 +334,6 @@ const Profile = () => {
                 <img
                   src={submission?.product_photo}
                   alt="submission image"
-                  fill
                   objectFit="cover"
                 />
               ) : (
