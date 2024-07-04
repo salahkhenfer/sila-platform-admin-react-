@@ -1,0 +1,28 @@
+{
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/"
+        },
+        {
+            "src": "/profile",
+            "dest": "/"
+        },
+        {
+            "src": "/posts",
+            "dest": "/"
+        },
+        {
+            "src": "/stories",
+            "dest": "/"
+        },
+        {
+            "src": "/sponsor",
+            "dest": "/"
+        },
+        {
+            "src": "/login",
+            "dest": "/"
+        }
+    ]
+}
