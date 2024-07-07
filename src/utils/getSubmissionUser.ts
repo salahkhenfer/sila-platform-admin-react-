@@ -4,6 +4,6 @@ export const GetUserInfo = async (submissionId: string) => {
         const data = await response.json();
         return data;
     } catch (err) {
-        alert("Error getting user info!");
+        console.log(err);
     }
 };

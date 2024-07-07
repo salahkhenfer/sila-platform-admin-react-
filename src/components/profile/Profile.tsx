@@ -38,6 +38,8 @@ import { SubmissionContext } from "../../Pages/Dashboard";
 import { GetUserInfo } from "../../utils/getSubmissionUser";
 import { UpdateRejectionNote } from "../../utils/updateSubmissionRejectionNote";
 import { UpdateStatus } from "../../utils/updateSubmissionStatus";
+import { DirectPay } from "../../utils/getDirectPay";
+import { HiOutlineExternalLink } from "react-icons/hi";
 
 const Profile = () => {
   const location = useLocation();
@@ -50,6 +52,8 @@ const Profile = () => {
   const pathName = location.pathname;
 
   const { selectedSubmission } = useContext(SubmissionContext);
+
+  const [directPayment, setDirectPayment] = useState("");
 
   useEffect(() => {
     const param = searchParams.get("submission");
@@ -78,13 +82,11 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    if (submission != null) {
-      (async () => {
-        const data = await GetUserInfo(submission?.id);
-        setUserInfo(data.user);
-      })();
-    }
-  }, [submission]);
+    (async () => {
+      const data = await GetUserInfo(selectedSubmission.id);
+      setUserInfo(data.user);
+    })();
+  }, []);
 
   //Changing status
   const [statusLoading, setStatusLoading] = useState(false);
@@ -116,6 +118,15 @@ const Profile = () => {
     setRejectionLoading(true);
     replace("/");
   };
+
+  useEffect(() => {
+    (async () => {
+      const data = await DirectPay(selectedSubmission.id);
+      if (data.id) {
+        setDirectPayment(data);
+      };
+    })();
+  }, []);
 
   return (
     <div className="h-screen w-full md:p-10 flex flex-col gap-5 max-h-screen ;d.overflow-auto">
@@ -288,23 +299,42 @@ const Profile = () => {
         </CardContent>
       </Card>
 
-      <div className="flex items-center gap-3">
-        {submission?.paid ? (
-          <>
-            <Checkbox checked />
-            <p className="font-semibold">
-              This account has completed the payment process
-            </p>
-          </>
+      {
+        directPayment != "" ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>This client made a manual payment.</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <p>Payment photo:</p>
+                <a href={directPayment.photo} target="_blank">
+                  <HiOutlineExternalLink size={20} />
+                </a>
+              </div>
+              <img className="object-cover rounded-xl h-[200px] w-[200px]" src={directPayment.photo} alt="" />
+            </CardContent>
+          </Card>
         ) : (
-          <>
-            <IoClose size={20} />
-            <p className="font-semibold">
-              This account did not complete the payment process
-            </p>
-          </>
-        )}
-      </div>
+          <div className="flex items-center gap-3">
+            {submission?.paid ? (
+              <>
+                <Checkbox checked />
+                <p className="font-semibold">
+                  This account has completed the payment process
+                </p>
+              </>
+            ) : (
+              <>
+                <IoClose size={20} />
+                <p className="font-semibold">
+                  This account did not complete the payment process
+                </p>
+              </>
+            )}
+          </div>
+        )
+      }
 
       <div className="flex flex-col gap-5 items-start md:flex-row md:items-center">
         <Dialog>
