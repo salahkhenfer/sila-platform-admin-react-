@@ -53,7 +53,7 @@ const Profile = () => {
 
   const { selectedSubmission } = useContext(SubmissionContext);
 
-  const [directPayment, setDirectPayment] = useState("");
+  const [directPayment, setDirectPayment] = useState<any>("");
 
   useEffect(() => {
     const param = searchParams.get("submission");

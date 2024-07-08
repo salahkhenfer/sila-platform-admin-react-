@@ -6,8 +6,8 @@ import { useAuth } from "../lib/Auth";
 import { Dispatch, SetStateAction } from "react";
 
 export const SubmissionContext = createContext<{
-  selectedSubmission: string;
-  setSelectedSubmission: Dispatch<SetStateAction<string>>;
+  selectedSubmission: any;
+  setSelectedSubmission: Dispatch<SetStateAction<any>>;
 }>({
   selectedSubmission: "",
   setSelectedSubmission: () => {},
