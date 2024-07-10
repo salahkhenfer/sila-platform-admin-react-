@@ -40,6 +40,7 @@ import { UpdateRejectionNote } from "../../utils/updateSubmissionRejectionNote";
 import { UpdateStatus } from "../../utils/updateSubmissionStatus";
 import { DirectPay } from "../../utils/getDirectPay";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import { AiFillEuroCircle } from "react-icons/ai";
 
 const Profile = () => {
   const location = useLocation();
@@ -335,6 +336,18 @@ const Profile = () => {
           </div>
         )
       }
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <AiFillEuroCircle size={20} />
+            <p className="font-semibold">Price of this Sponsorship:</p>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>{selectedSubmission.price}</p>
+        </CardContent>
+      </Card>
 
       <div className="flex flex-col gap-5 items-start md:flex-row md:items-center">
         <Dialog>
