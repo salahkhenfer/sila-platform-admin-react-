@@ -12,6 +12,7 @@ import { Button } from "../components/ui/button";
 import { RiStickyNoteAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useAuth } from "../lib/Auth";
+import { BsFillChatLeftDotsFill } from "react-icons/bs";
 
 const SideNav = () => {
   const [shrink, setShrink] = useState<boolean>(false);
@@ -25,7 +26,7 @@ const SideNav = () => {
       <motion.div
         animate={{ width: shrink ? "4rem" : "25rem" }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="md:w-[25rem] max-md:hidden p-4 w-full overflow-x-hidden max-md:h-screen   min-w-[4rem] bg-white z-50 md:p-4  pl-0 relative border-r-[1px] border-gray-300"
+        className="md:w-[25rem] max-md:hidden p-4 w-full h-full overflow-x-hidden max-md:h-screen   min-w-[4rem] bg-white z-50 md:p-4  pl-0 relative border-r-[1px] border-gray-300"
       >
         <div className="flex items-center justify-between">
           {!shrink && (
@@ -71,6 +72,13 @@ const SideNav = () => {
           >
             <MdHistoryToggleOff size={20} />
             <p>Stories</p>
+          </Link>
+          <Link
+            to={"/chat"}
+            className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"
+          >
+            <BsFillChatLeftDotsFill size={20} />
+            <p>Chat</p>
           </Link>
           <Link
             to={"/sponsor"}

@@ -33,6 +33,7 @@ import Stories from "./Pages/Stories";
 import Sponsor from "./Pages/Sponsor";
 import SponsorPage from "./components/sponsor/SponsorPage";
 import { useAuth } from "./lib/Auth";
+import Chat from "./Pages/Chat";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/stories",
         element: <Stories />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />
       },
       {
         path: "/sponsor",
