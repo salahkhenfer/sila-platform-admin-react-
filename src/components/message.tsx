@@ -15,7 +15,7 @@ const message = ({ msg } : { msg: any }) => {
             )
           }
         </div>
-        <div className='bg-[#7538D4] p-2 w-fit rounded-2xl rounded-br-none max-w-[60%] break-words text-white'>
+        <div className='bg-[#7538D4] p-2 w-fit rounded-2xl rounded-br-none max-w-[12rem] lg:max-w-[27rem] break-words text-white'>
             <p>{msg.content}</p>
         </div>
     </div>

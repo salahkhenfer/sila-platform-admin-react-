@@ -34,23 +34,25 @@ const clientChat = ({ chat } : { chat: any }) => {
   const openChat = () => {
     const params = new URLSearchParams(searchParams);
     params.set("chatId", chat.id);
+    params.set("chatName", chat.chat_name);
+    params.set("lastMessageTime", time);
     replace(`${pathName}?${params.toString()}`);
   };
 
   return (
-    <button onClick={openChat} className="flex items-center gap-3 p-3 rounded-2xl max-w-[20rem]" style={{backgroundColor: chatId == chat.id ? '#7438d442' : 'transparent',}}>
+    <button onClick={openChat} className="flex items-center gap-3 p-3 rounded-2xl w-full mb-3" style={{backgroundColor: chatId == chat.id ? '#7438d442' : 'transparent',}}>
         <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src="/user.png" />
             <AvatarFallback>CN</AvatarFallback>
         </Avatar>
 
-        <div className="flex flex-col gap-2 w-[80%]">
+        <div className="flex flex-col gap-2 w-full">
             <div className="flex items-center justify-between">
-                <p className="font-semibold">{chat.chat_name}</p>
+                <p className="truncate font-semibold max-w-[3rem]">{chat.chat_name}</p>
                 <p className="text-[14px] font-medium text-[gray]">{moment(time).format('LT')}</p>
             </div>
 
-            <p className="truncate font-light">{chat.last_message}</p>
+            <p className="text-start truncate font-light max-w-[7rem]">{chat.last_message}</p>
         </div>
     </button>
   )

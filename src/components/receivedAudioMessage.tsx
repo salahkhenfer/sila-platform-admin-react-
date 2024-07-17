@@ -60,7 +60,7 @@ const receivedAudioMessage = ({ msg } : { msg: any }) => {
     <div className='flex items-end gap-1 w-full relative'>
         <p className='absolute right-0 bottom-0 text-[14px] font-semibold text-[#7538D4]'>{moment(msg.created_at).format('LT')}</p>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src="/user.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className='bg-[#eeeeee] flex items-center gap-2 rounded-2xl p-3'>

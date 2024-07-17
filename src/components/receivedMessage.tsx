@@ -6,10 +6,10 @@ const receivedMessage = ({ msg } : { msg: any }) => {
     <div className='flex items-end gap-1 w-full relative'>
         <p className='absolute right-0 bottom-0 text-[14px] font-semibold text-[#7538D4]'>{moment(msg.created_at).format('LT')}</p>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src="/user.png" />
+          <AvatarFallback>...</AvatarFallback>
         </Avatar>
-        <div className='bg-[#eeeeee] p-2 w-fit rounded-2xl rounded-bl-none max-w-[70%] break-words'>
+        <div className='bg-[#eeeeee] p-2 w-fit rounded-2xl rounded-bl-none max-w-[10rem] lg:max-w-[25rem] break-words'>
             <p>{msg.content}</p>
         </div>
     </div>

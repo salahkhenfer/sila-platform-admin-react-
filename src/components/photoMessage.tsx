@@ -23,13 +23,13 @@ const photoMessage = ({ msg } : { msg: any }) => {
             )
           }
         </div>
-        <div className='h-[10rem] w-[40%] rounded-2xl relative overflow-hidden'>
+        <div className='h-fit max-h-[10rem] w-fit max-w-[12rem] lg:max-w-[27rem] rounded-2xl relative overflow-hidden'>
             <Dialog>
                 <DialogTrigger>
                     <div className='absolute top-0 bottom-0 left-0 right-0 z-10 bg-transparent hover:bg-[#70707083] flex items-center justify-center' />
                     <img className='h-full w-full object-cover' src={msg.content} alt="photo message" />
                 </DialogTrigger>
-                <DialogContent className='h-[80%] w-1/2 overflow-hidden'>
+                <DialogContent className='h-[80%] overflow-hidden'>
                   <img className='absolute h-full w-full object-cover' src={msg.content} alt="photo message" />
                 </DialogContent>
             </Dialog>

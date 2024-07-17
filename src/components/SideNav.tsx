@@ -152,6 +152,14 @@ const SideNav = () => {
             <p>Stories</p>
           </Link>
           <Link
+            to={"/chat"}
+             onClick={() => setShrink(!shrink)}
+            className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"
+          >
+            <BsFillChatLeftDotsFill size={20} />
+            <p>Chat</p>
+          </Link>
+          <Link
             to={"/sponsor"}
              onClick={() => setShrink(!shrink)}
             className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4"

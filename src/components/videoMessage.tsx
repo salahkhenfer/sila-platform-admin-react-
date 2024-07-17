@@ -15,7 +15,7 @@ const videoMessage = ({ msg } : { msg: any }) => {
             )
           }
         </div>
-        <div className='h-[10rem] w-[40%] rounded-2xl overflow-hidden'>
+        <div className='h-[10rem] w-fit max-w-[12rem] lg:max-w-[27rem] rounded-2xl overflow-hidden'>
             <video className='w-full h-full object-cover' src={msg.content} controls></video>
         </div>
     </div>
