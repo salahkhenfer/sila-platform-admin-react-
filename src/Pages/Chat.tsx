@@ -92,14 +92,16 @@ const Chat = () => {
         });
     
         newSocket.addEventListener("message", (event) => {
-          const message = JSON.parse(event.data);
-          if (String(message.chat_id) == String(chatId)) {
-            setMessages((prev: any) => [...prev, message]);
-            scrollToBottom();
             (async () => {
                 const data = await GetChats();
                 setChats(data.chats);
             })();
+
+          const message = JSON.parse(event.data);
+          
+          if (String(message.chat_id) == String(chatId)) {
+            setMessages((prev: any) => [...prev, message]);
+            scrollToBottom();
           }
         });
     }, [chatId]);
@@ -379,9 +381,7 @@ const Chat = () => {
                             <ScrollArea className="h-full w-full p-4">  
                                 {
                                     chats.map((chat: any) => (
-                                        <SheetClose className="w-full">
-                                            <ClientChat chat={chat} />
-                                        </SheetClose>
+                                        <ClientChat chat={chat} />
                                     ))
                                 }
                             </ScrollArea>

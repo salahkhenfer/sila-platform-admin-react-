@@ -4,6 +4,31 @@ import moment from "moment";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBell } from "react-icons/fa";
 import { RemoveNotification } from "../utils/removeChatNotification";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
+import { Button } from "./ui/button";
+import CircularProgress from "@mui/material/CircularProgress";
+import { TbTrashFilled } from "react-icons/tb";
+import { MdExpandMore } from "react-icons/md";
+import { GetMessages } from "../utils/getMessages";
+import { DeleteFile } from "../utils/deleteFile";
+import { RemoveMessage } from "../utils/removeMessage";
+import { DeleteChat } from "../utils/deleteChat";
 
 const clientChat = ({ chat } : { chat: any }) => {
 
@@ -45,6 +70,26 @@ const clientChat = ({ chat } : { chat: any }) => {
     }
   };
 
+  //Delete chat
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const removeChat = async () => {
+    setLoading(true);
+    const messages = await GetMessages(String(chat.id), 10000, 1);
+    const messagePromises = messages.messages.map( async (msg: any) => {
+      if (msg.message_type != "text") {
+        await DeleteFile(msg.content);
+        await RemoveMessage(msg.id);
+      } else {
+        await RemoveMessage(msg.id);
+      }
+    });
+
+    await Promise.all(messagePromises);
+    await DeleteChat(chat.id);
+    window.location.reload();
+  };
+
   return (
     <button onClick={openChat} className="flex items-center gap-3 p-3 rounded-2xl w-full mb-3 relative" style={{backgroundColor: chatId == chat.id ? '#7438d442' : 'transparent',}}>
         <Avatar>
@@ -56,6 +101,44 @@ const clientChat = ({ chat } : { chat: any }) => {
             <div className="flex items-center justify-between">
                 <p className="truncate font-semibold max-w-[3rem]">{chat.chat_name}</p>
                 <p className="text-[14px] font-medium text-[gray]">{moment(time).format('LT')}</p>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <MdExpandMore size={20} />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Chats</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <AlertDialog>
+                      <AlertDialogTrigger className="w-full">
+                        <Button
+                          variant="outline"
+                          className="w-full flex items-center gap-3"
+                        >
+                          <TbTrashFilled /> Delete
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete
+                            the post and remove it's data from our servers.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <Button onClick={removeChat}>
+                            {loading ? (
+                              <CircularProgress size={13} color="inherit" />
+                            ) : (
+                              "Delete"
+                            )}
+                          </Button>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
             <p className="text-start truncate font-light max-w-[7rem]">{chat.last_message}</p>
