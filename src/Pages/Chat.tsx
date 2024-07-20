@@ -44,6 +44,13 @@ import { GoPeople } from "react-icons/go";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { IoTime } from "react-icons/io5";
 import moment from "moment";
+import { FaCircleArrowUp } from "react-icons/fa6";
+import CircularProgress from '@mui/material/CircularProgress';
+import { Input } from "../components/ui/input";
+import { CiSearch } from "react-icons/ci";
+import { SearchChats } from "../utils/searchChats";
+
+const WS_URL = "wss://sila-backend-v2.onrender.com/v2/chatWebsocket";
 
 const Chat = () => {
 
@@ -55,7 +62,7 @@ const Chat = () => {
 
     const imageRegex = /\bimage\b/;
     const videoRegex = /\bvideo\b/;
-
+    
     const chatRef = useRef<HTMLDivElement>(null);
 
     const [startRecording, setStartRecording] = useState(false);
@@ -67,9 +74,36 @@ const Chat = () => {
     const [file, setFile] = useState<any>(null);
     const [textMessage, setTextMessage] = useState("");
     const [showSendBtn, setShowSendBtn] = useState(false);
+    const [search, setSearch] = useState("");
+    const [socket, setSocket] = useState<WebSocket | null>(null);
 
     const [chats, setChats] = useState<any>([]);
     const [messages, setMessages] = useState<any>([]);
+    const [page, setPage] = useState(1);
+    const [pageLoading, setPageLoading] = useState(false);
+
+    //Receiving websocket messages
+    useEffect(() => {
+        const newSocket = new WebSocket(WS_URL);
+        setSocket(newSocket);
+    
+        newSocket.addEventListener("open", () => {
+          console.log("WebSocket connection opened");
+        });
+    
+        newSocket.addEventListener("message", (event) => {
+          const message = JSON.parse(event.data);
+          if (String(message.chat_id) == String(chatId)) {
+            setMessages((prev: any) => [...prev, message]);
+            scrollToBottom();
+            (async () => {
+                const data = await GetChats();
+                setChats(data.chats);
+            })();
+          }
+        });
+    }, [chatId]);
+    //
 
     useEffect(() => {
         if (startRecording) {
@@ -115,7 +149,8 @@ const Chat = () => {
 
     //Getting messages for this chat
     const getChatMessages = async () => {
-        const messages = await GetMessages(String(chatId));
+        setPage(1);
+        const messages = await GetMessages(String(chatId), 50, 1);
         if (chatId != "") {
             setMessages(messages.messages);
             scrollToBottom();
@@ -141,6 +176,17 @@ const Chat = () => {
 
             await SendMessage(String(chatId), "admin", "text", textMessage);
             getChatMessages();
+            const msg = {
+                chat_id: chatId,
+                sender_id: "admin",
+                message_type: "text",
+                content: textMessage,
+                sending: true,
+                created_at: Date.now()
+            };
+            if (socket) {
+                socket.send(JSON.stringify(msg));
+            }
 
             clearInput();
         } else if (photo != null) {
@@ -157,6 +203,17 @@ const Chat = () => {
             const photoURL = await UploadFile(photo);
             await SendMessage(String(chatId), "admin", "photo", photoURL);
             getChatMessages();
+            const msg = {
+                chat_id: chatId,
+                sender_id: "admin",
+                message_type: "photo",
+                content: photoURL,
+                sending: true,
+                created_at: Date.now()
+            };
+            if (socket) {
+                socket.send(JSON.stringify(msg));
+            }
 
             clearInput();
         } else if (video != null) {
@@ -173,6 +230,17 @@ const Chat = () => {
             const videoURL = await UploadFile(video);
             await SendMessage(String(chatId), "admin", "video", videoURL);
             getChatMessages();
+            const msg = {
+                chat_id: chatId,
+                sender_id: "admin",
+                message_type: "video",
+                content: videoURL,
+                sending: true,
+                created_at: Date.now()
+            };
+            if (socket) {
+                socket.send(JSON.stringify(msg));
+            }
 
             clearInput();
         } else if (file != null) {
@@ -189,6 +257,17 @@ const Chat = () => {
             const fileURL = await UploadFile(file);
             await SendMessage(String(chatId), "admin", "file", fileURL);
             getChatMessages();
+            const msg = {
+                chat_id: chatId,
+                sender_id: "admin",
+                message_type: "file",
+                content: fileURL,
+                sending: true,
+                created_at: Date.now()
+            };
+            if (socket) {
+                socket.send(JSON.stringify(msg));
+            }
 
             clearInput();
         } else if (audioFile != null && audioURL != null) {
@@ -205,6 +284,17 @@ const Chat = () => {
             const audioUrl = await UploadFile(audioFile);
             await SendMessage(String(chatId), "admin", "audio", audioUrl);
             getChatMessages();
+            const msg = {
+                chat_id: chatId,
+                sender_id: "admin",
+                message_type: "audio",
+                content: audioUrl,
+                sending: true,
+                created_at: Date.now()
+            };
+            if (socket) {
+                socket.send(JSON.stringify(msg));
+            }
 
             clearInput();
         }
@@ -231,6 +321,19 @@ const Chat = () => {
         }
     };
 
+    const paginateMessages = async () => {
+        setPageLoading(true);
+        setPage(page + 1);
+        const messages = await GetMessages(String(chatId), 50, page + 1);
+        setMessages((prev: any) => [...messages.messages, ...prev]);
+        setPageLoading(false);
+    };
+
+    const searchChats = async () => {
+        const data = await SearchChats(search);
+        setChats(data.chats);
+    };
+
   return (
     <div className='w-full h-screen p-2 flex flex-col items-start gap-3'>
         <Sheet>
@@ -249,6 +352,20 @@ const Chat = () => {
                     <SheetDescription>
                         You can find all the chats of all the clients that contacted the Support
                         down below, and reply to them at any time!
+                    </SheetDescription>
+                    <SheetDescription>
+                        <div className="w-full relative">
+                            {
+                                search != "" ? (
+                                    <Button onClick={searchChats} size="icon" className="absolute left-1 h-[30px] w-[30px] rounded-full top-[50%] translate-y-[-50%]">
+                                        <CiSearch size={20} />
+                                    </Button>
+                                ) : (
+                                    <CiSearch size={20} className="absolute left-3 top-[50%] translate-y-[-50%]" />
+                                )
+                            }
+                            <Input value={search} onChange={(e) => setSearch(e.target.value)} className="px-10" placeholder="Search Chats..." />
+                        </div>
                     </SheetDescription>
                 </SheetHeader>
                 <div className="w-full h-[80%] mt-3">
@@ -305,6 +422,16 @@ const Chat = () => {
                     </div>
                 ) : (
                     <div ref={chatRef} className="h-[90%] w-full p-3 flex flex-col gap-3 overflow-auto">
+                        <button onClick={paginateMessages} className='w-fit h-[2rem] self-center bg-[#7438d488] flex items-center gap-3 p-2 rounded-2xl text-white'>
+                            <p className='text-[14px]'>Load more messages</p>
+                            {
+                                pageLoading ? (
+                                    <CircularProgress size={13} color='inherit' />
+                                ) : (
+                                    <FaCircleArrowUp />
+                                )
+                            }
+                        </button>
                         {
                             messages.map((msg: any) => (
                                 <>
