@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiStats } from "react-icons/bi";
 import {
   MdHistoryToggleOff,
@@ -12,20 +12,55 @@ import { Button } from "../components/ui/button";
 import { RiStickyNoteAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useAuth } from "../lib/Auth";
+import { BsFillChatLeftDotsFill } from "react-icons/bs";
+import { GetChats } from "../utils/getChats";
+
+const WS_URL = "wss://sila-backend-v2.onrender.com/v2/chatWebsocket";
 
 const SideNav = () => {
   const [shrink, setShrink] = useState<boolean>(false);
+  const [notification, setNotification] = useState(false);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
 
   const { logout } = useAuth();
   const handelLogout = () => {
     logout();
   };
+
+  const checkNotifications = async () => {
+    const data = await GetChats();
+    data.chats.map((chat: any) => {
+      if (chat.notify && chat.last_message_sender != "admin") {
+        setNotification(true);
+      }
+    })
+  };
+
+  useEffect(() => {
+    checkNotifications();
+  }, []);
+
+  //Receiving websocket messages
+  useEffect(() => {
+    const newSocket = new WebSocket(WS_URL);
+    setSocket(newSocket);
+
+    newSocket.addEventListener("open", () => {
+      console.log("WebSocket connection opened");
+    });
+
+    newSocket.addEventListener("message", (event) => {
+      checkNotifications();
+    });
+  }, []);
+  //
+
   return (
     <div>
       <motion.div
         animate={{ width: shrink ? "4rem" : "25rem" }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="md:w-[25rem] max-md:hidden p-4 w-full overflow-x-hidden max-md:h-screen   min-w-[4rem] bg-white z-50 md:p-4  pl-0 relative border-r-[1px] border-gray-300"
+        className="md:w-[25rem] max-md:hidden p-4 w-full h-full overflow-x-hidden max-md:h-screen   min-w-[4rem] bg-white z-50 md:p-4  pl-0 relative border-r-[1px] border-gray-300"
       >
         <div className="flex items-center justify-between">
           {!shrink && (
@@ -71,6 +106,18 @@ const SideNav = () => {
           >
             <MdHistoryToggleOff size={20} />
             <p>Stories</p>
+          </Link>
+          <Link
+            to={"/chat"}
+            className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4 relative"
+          >
+            <BsFillChatLeftDotsFill size={20} />
+            <p>Chat</p>
+            {
+              notification && (
+                <div className="h-[10px] w-[10px] rounded-full bg-[red] absolute top-3 left-3"></div>
+              )
+            }
           </Link>
           <Link
             to={"/sponsor"}
@@ -142,6 +189,19 @@ const SideNav = () => {
           >
             <MdHistoryToggleOff size={20} />
             <p>Stories</p>
+          </Link>
+          <Link
+            to={"/chat"}
+             onClick={() => setShrink(!shrink)}
+            className="flex items-center gap-4 w-full min-w-[20rem] justify-start text-black hover:bg-purple-600 hover:text-white rounded-none p-4 relative"
+          >
+            <BsFillChatLeftDotsFill size={20} />
+            <p>Chat</p>
+            {
+              notification && (
+                <div className="h-[10px] w-[10px] rounded-full bg-[red] absolute top-3 left-3"></div>
+              )
+            }
           </Link>
           <Link
             to={"/sponsor"}
